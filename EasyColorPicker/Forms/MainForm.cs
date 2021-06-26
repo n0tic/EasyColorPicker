@@ -127,5 +127,10 @@ namespace EasyColorPicker
         {
             if (SelectedPreviewTextBox.Text != "") Clipboard.SetText(SelectedPreviewTextBox.Text);
         }
+
+        private void EasyColorPickerForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            keyhandler.Unregiser();
+        }
     }
 }

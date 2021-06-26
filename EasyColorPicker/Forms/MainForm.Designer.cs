@@ -56,7 +56,7 @@ namespace EasyColorPicker
             this.LivePreviewColorBox.Size = new System.Drawing.Size(20, 20);
             this.LivePreviewColorBox.TabIndex = 0;
             // 
-            // timer1
+            // CaptureTimer
             // 
             this.CaptureTimer.Tick += new System.EventHandler(this.CaptureTimer_Tick);
             // 
@@ -182,6 +182,7 @@ namespace EasyColorPicker
             this.Controls.Add(this.CurrentGroup);
             this.Name = "EasyColorPickerForm";
             this.Text = "Easy Color Picker";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EasyColorPickerForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.LivePreviewBox)).EndInit();
             this.CurrentGroup.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
