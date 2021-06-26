@@ -31,7 +31,7 @@ namespace EasyColorPicker
         {
             this.components = new System.ComponentModel.Container();
             this.LivePreviewColorBox = new System.Windows.Forms.Panel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.CaptureTimer = new System.Windows.Forms.Timer(this.components);
             this.LivePreviewLabelBox = new System.Windows.Forms.Label();
             this.LivePreviewBox = new System.Windows.Forms.PictureBox();
             this.CurrentGroup = new System.Windows.Forms.GroupBox();
@@ -58,7 +58,7 @@ namespace EasyColorPicker
             // 
             // timer1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.CaptureTimer.Tick += new System.EventHandler(this.CaptureTimer_Tick);
             // 
             // LivePreviewLabelBox
             // 
@@ -108,7 +108,7 @@ namespace EasyColorPicker
             this.ClearSavedColorsButton.TabIndex = 7;
             this.ClearSavedColorsButton.Text = "Clear";
             this.ClearSavedColorsButton.UseVisualStyleBackColor = true;
-            this.ClearSavedColorsButton.Click += new System.EventHandler(this.button1_Click);
+            this.ClearSavedColorsButton.Click += new System.EventHandler(this.ClearSavedColorsButton_Click);
             // 
             // SavedColorsListView
             // 
@@ -128,8 +128,8 @@ namespace EasyColorPicker
             this.SavedColorsListView.TabIndex = 6;
             this.SavedColorsListView.UseCompatibleStateImageBehavior = false;
             this.SavedColorsListView.View = System.Windows.Forms.View.Details;
-            this.SavedColorsListView.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
-            this.SavedColorsListView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listView1_KeyDown);
+            this.SavedColorsListView.SelectedIndexChanged += new System.EventHandler(this.SavedColorsListView_SelectedIndexChanged);
+            this.SavedColorsListView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SavedColorsListView_KeyDown);
             // 
             // columnHeader1
             // 
@@ -194,7 +194,7 @@ namespace EasyColorPicker
         #endregion
 
         private System.Windows.Forms.Panel LivePreviewColorBox;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer CaptureTimer;
         private System.Windows.Forms.Label LivePreviewLabelBox;
         private System.Windows.Forms.PictureBox LivePreviewBox;
         private System.Windows.Forms.GroupBox CurrentGroup;

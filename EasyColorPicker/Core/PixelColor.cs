@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EasyColorPicker
 {
@@ -25,7 +21,8 @@ namespace EasyColorPicker
             return GetColorAt(cursor);
         }
 
-        static Bitmap screenPixel = new Bitmap(1, 1, PixelFormat.Format32bppArgb);
+        private static Bitmap screenPixel = new Bitmap(1, 1, PixelFormat.Format32bppArgb);
+
         public static Color GetColorAt(Point location)
         {
             using (Graphics gdest = Graphics.FromImage(screenPixel))

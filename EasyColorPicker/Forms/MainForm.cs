@@ -1,65 +1,55 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EasyColorPicker
 {
     public partial class EasyColorPickerForm : Form
     {
-        KeyHandler keyhandler;
+        // Global keyhandler (hook)
+        private KeyHandler keyhandler;
 
-        Color color;
+        // Current color
+        private Color color;
 
-        Point point = new Point();
-        const int zoomFactor = 4;
-        Size newSize = new Size((int)(100 * zoomFactor), (int)(100 * zoomFactor));
+        // These are for selecting a pixel and resizing the captured imagepreview.
+        private Point point = new Point();
 
-        [DllImport("user32.dll")]
-        static public extern bool ShowScrollBar(System.IntPtr hWnd, int wBar, bool bShow);
+        private const int zoomFactor = 4;
+        private Size newSize = new Size((int)(100 * zoomFactor), (int)(100 * zoomFactor));
 
-        private const uint SB_HORZ = 0;
-
-        private const uint SB_VERT = 1;
-
-        private const uint ESB_DISABLE_BOTH = 0x3;
-
-        private const uint ESB_ENABLE_BOTH = 0x0;
-
+        // Constructor
         public EasyColorPickerForm()
         {
             InitializeComponent();
 
-            SavedColorsListView.Columns[0].Width = SavedColorsListView.Width - 18;
+            // This is to hide the horizontal scrollbar
+            SavedColorsListView.Columns[0].Width = SavedColorsListView.Width - 22;
 
+            // Register the hook / Global handler
             keyhandler = new KeyHandler(Keys.End, this);
             keyhandler.Register();
 
-            timer1.Start();
+            // Start capture-timer
+            CaptureTimer.Start();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void CaptureTimer_Tick(object sender, EventArgs e)
         {
             color = PixelColor.GetCursorPixelColor(sender, e);
             LivePreviewColorBox.BackColor = color;
             LivePreviewLabelBox.Text = $"{color.R}, {color.G}, {color.B}";
 
             if (LivePreviewBox.Image != null)
-            LivePreviewBox.Image.Dispose();
-            
+                LivePreviewBox.Image.Dispose();
+
             PixelColor.GetCursorPos(ref point);
             Rectangle rect = new Rectangle(point.X - 12, point.Y - 12, 100, 100);
 
             using (Bitmap bmp = new Bitmap(rect.Width, rect.Height, PixelFormat.Format32bppArgb))
             {
-                using(Bitmap image = new Bitmap(bmp , newSize))
+                using (Bitmap image = new Bitmap(bmp, newSize))
                 {
                     Graphics.FromImage(bmp).CopyFromScreen(rect.Left, rect.Top, 0, 0, bmp.Size, CopyPixelOperation.SourceCopy);
 
@@ -76,7 +66,7 @@ namespace EasyColorPicker
             GC.Collect();
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        private void SavedColorsListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (SavedColorsListView.SelectedIndices.Count <= 0) return;
 
@@ -118,14 +108,14 @@ namespace EasyColorPicker
             base.WndProc(ref m);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ClearSavedColorsButton_Click(object sender, EventArgs e)
         {
             SavedColorsListView.Items.Clear();
         }
 
-        private void listView1_KeyDown(object sender, KeyEventArgs e)
+        private void SavedColorsListView_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Delete)
+            if (e.KeyCode == Keys.Delete)
             {
                 if (SavedColorsListView.SelectedIndices.Count <= 0) return;
 
@@ -135,7 +125,7 @@ namespace EasyColorPicker
 
         private void CopySelectedColorsButton_Click(object sender, EventArgs e)
         {
-            if(SelectedPreviewTextBox.Text != "") Clipboard.SetText(SelectedPreviewTextBox.Text);
+            if (SelectedPreviewTextBox.Text != "") Clipboard.SetText(SelectedPreviewTextBox.Text);
         }
     }
 }
