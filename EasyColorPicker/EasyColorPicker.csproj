@@ -88,7 +88,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\012-cogwheel.png" />
-    <Content Include="Screenshot\tzknyrzJh2.gif" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Screenshot\20C9uYdKaq.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

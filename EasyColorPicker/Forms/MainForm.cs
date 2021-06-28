@@ -296,6 +296,8 @@ namespace EasyColorPicker
 
                     Core.SavePallet(sfd.FileName, pallet);
 
+                    SavedColorsListView.Items.Clear();
+
                     Text = $"{Core.Name} - {pallet.GetName()}";
                 }
             }
