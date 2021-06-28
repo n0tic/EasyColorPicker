@@ -315,5 +315,7 @@ namespace EasyColorPicker
                 }
             }
         }
+
+        private void AlwaysOnTopToggle_CheckedChanged(object sender, EventArgs e) => TopMost = AlwaysOnTopToggle.Checked;
     }
 }

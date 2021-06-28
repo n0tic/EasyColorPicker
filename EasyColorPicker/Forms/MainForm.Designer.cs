@@ -54,6 +54,7 @@ namespace EasyColorPicker
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ColorType = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.AlwaysOnTopToggle = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.LivePreviewBox)).BeginInit();
             this.CurrentGroup.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -272,17 +273,33 @@ namespace EasyColorPicker
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Quick Settings";
             // 
+            // AlwaysOnTopToggle
+            // 
+            this.AlwaysOnTopToggle.AutoSize = true;
+            this.AlwaysOnTopToggle.BackColor = System.Drawing.Color.Gainsboro;
+            this.AlwaysOnTopToggle.Location = new System.Drawing.Point(306, 5);
+            this.AlwaysOnTopToggle.Name = "AlwaysOnTopToggle";
+            this.AlwaysOnTopToggle.Size = new System.Drawing.Size(98, 17);
+            this.AlwaysOnTopToggle.TabIndex = 9;
+            this.AlwaysOnTopToggle.Text = "Always on top?";
+            this.AlwaysOnTopToggle.UseVisualStyleBackColor = false;
+            this.AlwaysOnTopToggle.CheckedChanged += new System.EventHandler(this.AlwaysOnTopToggle_CheckedChanged);
+            // 
             // EasyColorPickerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(404, 214);
+            this.Controls.Add(this.AlwaysOnTopToggle);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.CurrentGroup);
+            this.MaximizeBox = false;
             this.Name = "EasyColorPickerForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Easy Color Picker";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EasyColorPickerForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.LivePreviewBox)).EndInit();
@@ -323,6 +340,7 @@ namespace EasyColorPicker
         private System.Windows.Forms.ToolStripMenuItem LoadPalletButton;
         private System.Windows.Forms.ComboBox ColorType;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckBox AlwaysOnTopToggle;
     }
 }
 
