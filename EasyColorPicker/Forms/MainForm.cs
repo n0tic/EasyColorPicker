@@ -50,6 +50,7 @@ namespace EasyColorPicker
 
         private void SetPalletData()
         {
+            SavedColorsListView.Items.Clear();
             if (pallet.GetName() != "") Text = $"{Core.Name} - {pallet.GetName()}";
             if (pallet.GetSavedColorsList().Count > 0)
             {
