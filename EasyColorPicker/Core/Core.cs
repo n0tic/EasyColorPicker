@@ -10,14 +10,24 @@ namespace EasyColorPicker
 {
     public static class Core
     {
+        /// <summary>
+        /// Application name
+        /// </summary>
         public static string Name { get; private set; } = "Easy Color Picker";
 
+        /// <summary>
+        /// Save settings data
+        /// </summary>
+        /// <param name="data"></param>
         public static void SaveSettings(Settings data)
         {
+            // Initialize filestream
             using (FileStream dataStream = new FileStream("settings", FileMode.Create))
             {
+                // Create formatter
                 BinaryFormatter converter = new BinaryFormatter();
 
+                // Try converting and saving.
                 try { converter.Serialize(dataStream, data); }
                 catch (ArgumentNullException x) { MessageBox.Show(x.Message); }
                 catch (SerializationException x) { MessageBox.Show(x.Message); }
@@ -25,15 +35,22 @@ namespace EasyColorPicker
             }
         }
 
+        /// <summary>
+        /// Load settings data
+        /// </summary>
+        /// <returns></returns>
         public static Settings LoadSettings()
         {
             if (File.Exists("settings"))
             {
+                // Initialize filestream
                 using (FileStream dataStream = new FileStream("settings", FileMode.Open))
                 {
                     try
                     {
+                        // Create formatter
                         BinaryFormatter converter = new BinaryFormatter();
+                        // Try converting and setting.
                         Settings data = converter.Deserialize(dataStream) as Settings;
                         return data;
                     }
@@ -45,13 +62,21 @@ namespace EasyColorPicker
             else return null;
         }
 
+        /// <summary>
+        /// Save pallet data
+        /// </summary>
+        /// <param name="savepath"></param>
+        /// <param name="data"></param>
         public static void SavePallet(string savepath, PalletData data)
         {
+            // Initialize filestream
             using (FileStream dataStream = new FileStream(savepath, FileMode.Create))
             {
+                // Create formatter
                 BinaryFormatter converter = new BinaryFormatter();
                 try
                 {
+                    // Try converting and saving.
                     converter.Serialize(dataStream, data);
                 }
                 catch (ArgumentNullException x) { MessageBox.Show(x.Message); }
@@ -60,15 +85,24 @@ namespace EasyColorPicker
             }
         }
 
+        /// <summary>
+        /// Load pallet data
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static T Load<T>(string path)
         {
             if (File.Exists(path))
             {
+                // Initialize filestream
                 using (FileStream dataStream = new FileStream(path, FileMode.Open))
                 {
                     try
                     {
+                        // Create formatter
                         BinaryFormatter converter = new BinaryFormatter();
+                        // Try converting and setting.
                         T data = (T)converter.Deserialize(dataStream);
                         return data;
                     }
